@@ -92,6 +92,14 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        /**
+         *Take instance of Action Bar using getSupportActionBar and
+         *if it is not Null then call hide function
+         **/
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
         // Finds the views from the activity_login layout
         findViews();
 

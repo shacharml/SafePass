@@ -82,6 +82,14 @@ public class VerifyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify);
 
+        /**
+         *Take instance of Action Bar using getSupportActionBar and
+         *if it is not Null then call hide function
+         **/
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
         findViews();
         setupInputs();
         phoneNumber = String.format("+972%s", getIntent().getStringExtra(getString(R.string.LBL_phone)));
