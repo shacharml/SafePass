@@ -13,4 +13,9 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <!-- Circle ImageView-->
+    <style name="almost_circle">
+        <item name="cornerSize">25%</item>
+    </style>
 </resources>

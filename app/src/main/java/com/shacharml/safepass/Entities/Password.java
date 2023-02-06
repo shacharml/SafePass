@@ -1,63 +1,85 @@
-package com.shacharml.safepass.Objects;
+package com.shacharml.safepass.Entities;
+
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.PrimaryKey;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+@Entity (tableName = "password_table")
+//,foreignKeys = {@ForeignKey(entity = User.class,parentColumns = "id",childColumns = "userId")})
 public class Password {
+
+    @PrimaryKey()
+    @NonNull
+    @ColumnInfo(name = "id")
     private String id;
     private String name;
     private String password;
     private String urlToSite;
     private String img;
+//    @ColumnInfo(name = "userId", index = true)
+//    private int userId;
 
-    public Password(String name, String password, String urlToSite, String img) {
-        this.id = UUID.randomUUID().toString();
+    public Password(String name, String password) {
+        id = UUID.randomUUID().toString();
         this.name = name;
         this.password = password;
-        this.urlToSite = urlToSite;
-        this.img = img;
+//        this.userId = userId;
     }
 
+    @NonNull
     public String getId() {
         return id;
+    }
+
+    public void setId(@NonNull String id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public Password setName(String name) {
+    public void setName(String name) {
         this.name = name;
-        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public Password setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
-        return this;
     }
 
     public String getUrlToSite() {
         return urlToSite;
     }
 
-    public Password setUrlToSite(String urlToSite) {
+    public void setUrlToSite(String urlToSite) {
         this.urlToSite = urlToSite;
-        return this;
     }
 
     public String getImg() {
         return img;
     }
 
-    public Password setImg(String img) {
+    public void setImg(String img) {
         this.img = img;
-        return this;
     }
+
+//    public int getUserId() {
+//        return userId;
+//    }
+//
+//    public void setUserId(int userId) {
+//        this.userId = userId;
+//    }
 
     @Override
     public String toString() {
