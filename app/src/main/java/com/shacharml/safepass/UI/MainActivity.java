@@ -13,6 +13,8 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -100,30 +102,29 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        //Init RecyclerView
-        password_RCV_all_password = findViewById(R.id.password_RCV_all_password);
-        password_RCV_all_password.setLayoutManager(new LinearLayoutManager(this));
-        password_RCV_all_password.setHasFixedSize(true);
+//        //Init RecyclerView
+////        password_RCV_all_password = findViewById(R.id.password_RCV_all_password);
+//        password_RCV_all_password.setLayoutManager(new LinearLayoutManager(this));
+//        password_RCV_all_password.setHasFixedSize(true);
+//
+//        //create adapter
+//        PasswordsAdapter adapter = new PasswordsAdapter();
+//        password_RCV_all_password.setAdapter(adapter);
+//
+//
+//        //create view model
+//        passwordViewModel = new ViewModelProvider(this).get(PasswordViewModel.class);
+//        passwordViewModel.getAllPasswords().observe(this, new Observer<List<Password>>() {
+//            @Override
+//            public void onChanged(List<Password> passwords) {
+//                // TODO: 06/02/2023 update the recycler view
+//                adapter.setPasswords(passwords);
+//            }
+//        });
 
-        //create adapter
-        PasswordsAdapter adapter = new PasswordsAdapter();
-        password_RCV_all_password.setAdapter(adapter);
 
-
-        //create view model
-        passwordViewModel = new ViewModelProvider(this).get(PasswordViewModel.class);
-        passwordViewModel.getAllPasswords().observe(this, new Observer<List<Password>>() {
-            @Override
-            public void onChanged(List<Password> passwords) {
-                // TODO: 06/02/2023 update the recycler view
-                adapter.setPasswords(passwords);
-            }
-        });
-
-
-        //fragment Navigation
-//        NavController navController = Navigation.findNavController(this, R.id.activity_main_host_fragment);
-
+        //fragment Navigation - need to open the firs fragment in the nav graph
+        NavController navController = Navigation.findNavController(this, R.id.activity_main_host_fragment);
 
 
     }
