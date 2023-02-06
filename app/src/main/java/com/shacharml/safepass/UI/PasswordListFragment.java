@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -30,6 +31,7 @@ public class PasswordListFragment extends Fragment {
     private AppCompatImageButton main_BTN_add;
     private View view;
     private PasswordsAdapter adapter;
+    private SearchView main_EDT_search;
 
 
     public PasswordListFragment() {
@@ -67,6 +69,7 @@ public class PasswordListFragment extends Fragment {
             public void onChanged(List<Password> passwords) {
                 // TODO: 06/02/2023 update the recycler view
                 adapter.setPasswords(passwords);
+                adapter.setPasswordsFiltered(passwords);
             }
         });
 
@@ -79,8 +82,25 @@ public class PasswordListFragment extends Fragment {
             }
         });
 
+        main_EDT_search = view.findViewById(R.id.main_EDT_search);
+        main_EDT_search.clearFocus();
+        main_EDT_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
         return view;
     }
+
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

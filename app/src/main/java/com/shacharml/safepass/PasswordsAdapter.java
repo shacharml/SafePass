@@ -3,6 +3,8 @@ package com.shacharml.safepass;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageButton;
@@ -13,10 +15,12 @@ import com.shacharml.safepass.Entities.Password;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
-public class PasswordsAdapter extends RecyclerView.Adapter<PasswordsAdapter.PasswordViewHolder> {
+public class PasswordsAdapter extends RecyclerView.Adapter<PasswordsAdapter.PasswordViewHolder> implements Filterable {
 
     private List<Password> passwords = new ArrayList<>();
+    private List<Password> passwordsFiltered =new ArrayList<>();
 
 
     @NonNull
@@ -47,6 +51,47 @@ public class PasswordsAdapter extends RecyclerView.Adapter<PasswordsAdapter.Pass
     public void setPasswords(List<Password> passwords) {
         this.passwords = passwords;
         notifyDataSetChanged();
+    }
+
+    public void setPasswordsFiltered(List<Password> passwordsFiltered) {
+        this.passwordsFiltered = passwordsFiltered;
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public Filter getFilter() {
+        Filter filter = new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                FilterResults filterResults = new FilterResults();
+                List<Password> filterList = new ArrayList<>();
+
+                if(constraint == null || constraint.length() ==0){
+//                    filterResults.count =passwordsFiltered.size();
+//                    filterResults.values = passwordsFiltered;
+                    filterList.addAll(passwordsFiltered);
+                }
+                else {
+                    String searchChr = constraint.toString().toLowerCase(Locale.ROOT);
+//                    List<Password> resultData = new ArrayList<>();
+                    for (Password password : passwordsFiltered){
+                        if(password.getName().toLowerCase(Locale.ROOT).contains(searchChr)){
+                            filterList.add(password);
+                        }
+                    }
+                }
+                    filterResults.count =filterList.size();
+                    filterResults.values = filterList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                passwords = (List<Password>) results.values;
+                notifyDataSetChanged();
+            }
+        };
+        return filter;
     }
 
     class PasswordViewHolder extends RecyclerView.ViewHolder {
