@@ -8,83 +8,6 @@
     tools:context=".UI.MainActivity"
     android:id="@+id/drawer_layout"
     >
-<!--    android:fitsSystemWindows="true"-->
-
-
-<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_marginTop="20dp">-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/main_TXV_passwords"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="16dp"-->
-<!--            android:layout_marginTop="8dp"-->
-<!--            android:fontFamily="@font/gafata"-->
-<!--            android:text="@string/passwords"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:textSize="20sp"-->
-<!--            android:textStyle="bold"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/main_EDT_search"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:layout_marginTop="24dp"-->
-<!--            android:drawablePadding="10dp"-->
-<!--            android:drawableTint="#BCB9B9"-->
-<!--            android:ems="10"-->
-<!--            android:hint="@android:string/search_go"-->
-<!--            android:fontFamily="@font/gafata"-->
-<!--            android:inputType="text"-->
-<!--            android:paddingStart="20dp"-->
-<!--            android:textSize="16sp"-->
-<!--            android:textStyle="italic"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/main_TXV_passwords"-->
-<!--            android:layout_marginStart="16dp"-->
-<!--            android:layout_marginEnd="16dp"-->
-<!--            />-->
-<!--        &lt;!&ndash;            android:textIsSelectable="true"&ndash;&gt;-->
-<!--        &lt;!&ndash;            android:editable="false"&ndash;&gt;-->
-
-<!--        <androidx.appcompat.widget.AppCompatImageButton-->
-<!--            android:id="@+id/main_BTN_add"-->
-<!--            android:layout_width="35dp"-->
-<!--            android:layout_height="35dp"-->
-<!--            android:src="@drawable/ic_add"-->
-<!--            app:layout_constraintBottom_toBottomOf="@+id/main_TXV_passwords"-->
-<!--            app:layout_constraintEnd_toEndOf="@+id/main_EDT_search"-->
-<!--            app:layout_constraintTop_toTopOf="@+id/main_TXV_passwords" />-->
-
-<!--        <ProgressBar-->
-<!--            android:id="@+id/main_PRG_progress"-->
-<!--            android:layout_width="70dp"-->
-<!--            android:layout_height="70dp"-->
-<!--            android:layout_marginTop="60dp"-->
-<!--            android:visibility="invisible"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/main_EDT_search" />-->
-
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:id="@+id/password_RCV_all_password"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:layout_marginStart="16dp"-->
-<!--            android:layout_marginTop="24dp"-->
-<!--            android:layout_marginEnd="16dp"-->
-<!--            app:layout_constraintEnd_toEndOf="@+id/main_EDT_search"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/main_EDT_search"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/main_EDT_search"-->
-<!--            tools:listitem="@layout/password_card_view"/>-->
-
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -101,18 +24,6 @@
             />
 
     </LinearLayout>
-
-
-
-<!--    <TextView-->
-<!--        android:id="@+id/textView"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="TextView"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/main_nav_side_menu"

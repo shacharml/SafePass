@@ -124,6 +124,16 @@ public class MainActivity extends AppCompatActivity {
 
 
         //fragment Navigation - need to open the firs fragment in the nav graph
+
+//        //observe on the live data in room
+//        passwordViewModel.getAllPasswords().observe(this, new Observer<List<Password>>() {
+//            @Override
+//            public void onChanged(List<Password> passwords) {
+//                // TODO: 06/02/2023 update the recycler view
+//                adapter.setPasswords(passwords);
+//            }
+//        });
+
         NavController navController = Navigation.findNavController(this, R.id.activity_main_host_fragment);
 
 
