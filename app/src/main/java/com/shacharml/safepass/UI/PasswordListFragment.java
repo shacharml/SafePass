@@ -1,5 +1,9 @@
 package com.shacharml.safepass.UI;
 
+import static androidx.recyclerview.widget.ItemTouchHelper.LEFT;
+import static androidx.recyclerview.widget.ItemTouchHelper.RIGHT;
+import static androidx.recyclerview.widget.ItemTouchHelper.SimpleCallback;
+
 import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -23,9 +27,7 @@ import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -37,8 +39,6 @@ import com.shacharml.safepass.Entities.Password;
 import com.shacharml.safepass.PasswordsAdapter;
 import com.shacharml.safepass.R;
 import com.shacharml.safepass.ViewModels.PasswordViewModel;
-
-import java.util.List;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
@@ -52,8 +52,7 @@ public class PasswordListFragment extends Fragment {
     private AppCompatImageButton main_BTN_add;
     private View view;
     private PasswordsAdapter adapter;
-
-    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT |ItemTouchHelper.RIGHT) {
+    SimpleCallback simpleCallback = new SimpleCallback(0, LEFT | RIGHT) {
         @Override
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
             return false;
@@ -63,23 +62,30 @@ public class PasswordListFragment extends Fragment {
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
             int position = viewHolder.getBindingAdapterPosition();
             switch (direction) {
-                case ItemTouchHelper.LEFT:
-                {
+                case LEFT: {
                     passwordViewModel.delete(passwordViewModel.getAllPasswords().getValue().get(position));
                     adapter.notifyItemRemoved(position);
                     break;
                 }
 
-                case ItemTouchHelper.RIGHT: {
+                case RIGHT: {
                     Bundle bundle = new Bundle();
                     bundle.putInt("position", position);
                     Navigation.findNavController(view).navigate(R.id.action_passwordListFragment_to_editPasswordFragment, bundle);
-//                    Navigation.findNavController(requireView()).navigate(PasswordListFragmentDirections.actionPasswordListFragmentToEditPasswordFragment(), bundel);
                 }
             }
 
         }
 
+        /**
+         * @param c
+         * @param recyclerView
+         * @param viewHolder
+         * @param dX
+         * @param dY
+         * @param actionState
+         * @param isCurrentlyActive
+         */
         @Override
         public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
 
@@ -97,8 +103,6 @@ public class PasswordListFragment extends Fragment {
             super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
         }
     };
-
-
     private SearchView main_EDT_search;
 
     public PasswordListFragment() {
@@ -107,11 +111,8 @@ public class PasswordListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-// TODO: 06/02/2023 check if need to be here or on Create View
         //create view model
         passwordViewModel = new ViewModelProvider(requireActivity()).get(PasswordViewModel.class);
-
-
     }
 
     @Override
@@ -171,7 +172,7 @@ public class PasswordListFragment extends Fragment {
 
 
         //observe on the live data in room
-        passwordViewModel.getAllPasswords().observe(getActivity(), passwords -> {
+        passwordViewModel.getAllPasswords().observe(requireActivity(), passwords -> {
             adapter.setPasswords(passwords);
             adapter.setPasswordsFiltered(passwords);
         });

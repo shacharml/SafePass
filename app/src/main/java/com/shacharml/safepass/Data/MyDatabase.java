@@ -10,6 +10,7 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.shacharml.safepass.Entities.Password;
+import com.shacharml.safepass.R;
 
 @Database(entities = {Password.class}, version = 1, exportSchema = false)
 public abstract class MyDatabase extends RoomDatabase {
@@ -58,10 +59,10 @@ private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback(){
 //            User u = new User("0543349455");
 //            u.setId(1);
 //            userDao.insert(u);
-            passwordDau.insert(new Password("Gmail1","123456"));
-            passwordDau.insert(new Password("Gmail2","123456"));
-            passwordDau.insert(new Password("Gmail3","123456"));
-            passwordDau.insert(new Password("Gmail4","123456"));
+            passwordDau.insert(new Password("Spotify","123456", "www.google.com",String.valueOf(R.drawable.cl_spotify)));
+            passwordDau.insert(new Password("Gmail","123456","www.gmail.com",String.valueOf(R.drawable.cl_gmail)));
+            passwordDau.insert(new Password("Facebook","123456","www.facebook.com",String.valueOf(R.drawable.cl_facebook)));
+            passwordDau.insert(new Password("Linkdin","123456","www.linkdin.com",String.valueOf(R.drawable.cl_linkedin)));
             return null;
         }
     }

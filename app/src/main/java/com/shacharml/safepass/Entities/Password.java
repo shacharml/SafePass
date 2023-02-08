@@ -3,7 +3,6 @@ package com.shacharml.safepass.Entities;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 import com.shacharml.safepass.R;
@@ -12,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-@Entity (tableName = "password_table")
+@Entity(tableName = "password_table")
 //,foreignKeys = {@ForeignKey(entity = User.class,parentColumns = "id",childColumns = "userId")})
 public class Password {
 
@@ -33,6 +32,14 @@ public class Password {
         this.password = password;
         img = String.valueOf(R.drawable.ic_favorite);
 //        this.userId = userId;
+    }
+
+    public Password(String name, String password, String urlToSite, String img) {
+        id = UUID.randomUUID().toString();
+        this.name = name;
+        this.password = password;
+        this.urlToSite = urlToSite;
+        this.img = img;
     }
 
     public Password() {
@@ -104,7 +111,7 @@ public class Password {
         result.put("name", name);
         result.put("password", password);
         result.put("urlToSite", urlToSite);
-        result.put("img" , img);
+        result.put("img", img);
         return result;
     }
 }
