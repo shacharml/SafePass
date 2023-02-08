@@ -96,4 +96,6 @@ dependencies {
     // Feature module Support
     implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
 
+    //Swipe decorator
+    implementation 'it.xabaras.android:recyclerview-swipedecorator:1.4'
 }

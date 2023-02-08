@@ -116,7 +116,7 @@ public class AddPasswordFragment extends Fragment {
         new_TIL_password = view.findViewById(R.id.new_TIL_password);
         new_TIL_verify = view.findViewById(R.id.new_TIL_verify);
         new_BTN_Save = view.findViewById(R.id.new_BTN_Save);
-        new_BTN_back = view.findViewById(R.id.new_BTN_back);
+//        new_BTN_back = view.findViewById(R.id.new_BTN_back);
         new_RYC_images = view.findViewById(R.id.new_RYC_images);
         new_FAB_img_edit = view.findViewById(R.id.new_FAB_img_edit);
         new_IMG_password = view.findViewById(R.id.new_IMG_password);

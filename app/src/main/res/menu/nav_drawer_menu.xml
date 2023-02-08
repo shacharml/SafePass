@@ -16,7 +16,7 @@
         <item
             android:id="@+id/item_passwords"
             android:icon="@drawable/ic_password"
-            android:title="Passwords" />
+            android:title="All Passwords" />
 
         <item
             android:id="@+id/item_favorites"

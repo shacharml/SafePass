@@ -6,6 +6,8 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import com.shacharml.safepass.R;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -29,7 +31,11 @@ public class Password {
         id = UUID.randomUUID().toString();
         this.name = name;
         this.password = password;
+        img = String.valueOf(R.drawable.ic_favorite);
 //        this.userId = userId;
+    }
+
+    public Password() {
     }
 
     @NonNull

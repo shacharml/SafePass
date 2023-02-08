@@ -10,6 +10,7 @@ import com.shacharml.safepass.Data.PasswordDao;
 import com.shacharml.safepass.Entities.Password;
 
 import java.util.List;
+import java.util.concurrent.Executors;
 
 public class PasswordRepository {
 
@@ -27,6 +28,13 @@ public class PasswordRepository {
 
     public void updatePassword(Password password) {
         new PasswordRepository.UpdatePasswordAsyncTask(passwordDau).execute(password);
+//        Executors.newSingleThreadExecutor().execute(new Runnable() {
+//            @Override
+//            public void run() {
+//                //do in background
+//
+//            }
+//        });
     }
     public void deleteAll() {
         new PasswordRepository.DeleteAllPasswordAsyncTask(passwordDau).execute();

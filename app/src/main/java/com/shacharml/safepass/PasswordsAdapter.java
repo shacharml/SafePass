@@ -1,5 +1,6 @@
 package com.shacharml.safepass;
 
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
 import com.shacharml.safepass.Entities.Password;
 
@@ -20,14 +22,15 @@ import java.util.Locale;
 public class PasswordsAdapter extends RecyclerView.Adapter<PasswordsAdapter.PasswordViewHolder> implements Filterable {
 
     private List<Password> passwords = new ArrayList<>();
-    private List<Password> passwordsFiltered =new ArrayList<>();
+    private List<Password> passwordsFiltered = new ArrayList<>();
+    private PasswordListener passwordListener;
 
 
     @NonNull
     @Override
     public PasswordViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.password_card_view,parent,false);
+                .inflate(R.layout.password_card_view, parent, false);
         return new PasswordViewHolder(itemView);
     }
 
@@ -37,6 +40,7 @@ public class PasswordsAdapter extends RecyclerView.Adapter<PasswordsAdapter.Pass
         holder.password_TXV_password_name.setText(currentPassword.getName());
         holder.password_TXV_url.setText(currentPassword.getUrlToSite());
         holder.password_TXV_password.setText(currentPassword.getPassword());
+        holder.card_IMG_img.setImageResource(Integer.parseInt(currentPassword.getImg()));
     }
 
     @Override
@@ -66,22 +70,21 @@ public class PasswordsAdapter extends RecyclerView.Adapter<PasswordsAdapter.Pass
                 FilterResults filterResults = new FilterResults();
                 List<Password> filterList = new ArrayList<>();
 
-                if(constraint == null || constraint.length() ==0){
+                if (constraint == null || constraint.length() == 0) {
 //                    filterResults.count =passwordsFiltered.size();
 //                    filterResults.values = passwordsFiltered;
                     filterList.addAll(passwordsFiltered);
-                }
-                else {
+                } else {
                     String searchChr = constraint.toString().toLowerCase(Locale.ROOT);
 //                    List<Password> resultData = new ArrayList<>();
-                    for (Password password : passwordsFiltered){
-                        if(password.getName().toLowerCase(Locale.ROOT).contains(searchChr)){
+                    for (Password password : passwordsFiltered) {
+                        if (password.getName().toLowerCase(Locale.ROOT).contains(searchChr)) {
                             filterList.add(password);
                         }
                     }
                 }
-                    filterResults.count =filterList.size();
-                    filterResults.values = filterList;
+                filterResults.count = filterList.size();
+                filterResults.values = filterList;
                 return filterResults;
             }
 
@@ -94,10 +97,24 @@ public class PasswordsAdapter extends RecyclerView.Adapter<PasswordsAdapter.Pass
         return filter;
     }
 
+    public void setPasswordListener(PasswordListener passwordListener) {
+        this.passwordListener = passwordListener;
+    }
+
+    public interface PasswordListener {
+        void edit(Password password);
+
+        //        void seePassword(boolean bool);
+        void passwordClicked(Password password);
+
+        void copy(Password password);
+    }
+
     class PasswordViewHolder extends RecyclerView.ViewHolder {
         private MaterialTextView password_TXV_password_name;
         private MaterialTextView password_TXV_url;
         private MaterialTextView password_TXV_password;
+        private ShapeableImageView card_IMG_img;
 
         private AppCompatImageButton password_IMB_edit_password;
         private AppCompatImageButton password_IMB_see_password;
@@ -105,20 +122,42 @@ public class PasswordsAdapter extends RecyclerView.Adapter<PasswordsAdapter.Pass
 
         public PasswordViewHolder(View itemView) {
             super(itemView);
-           password_TXV_password_name = itemView.findViewById(R.id.password_TXV_password_name);
-           password_TXV_url = itemView.findViewById(R.id.password_TXV_url);
-           password_TXV_password = itemView.findViewById(R.id.password_TXV_password);
-           password_IMB_edit_password = itemView.findViewById(R.id.password_IMB_edit_password);
-           password_IMB_see_password = itemView.findViewById(R.id.password_IMB_see_password);
-           password_IMB_copy_password = itemView.findViewById(R.id.password_IMB_copy_password);
+            password_TXV_password_name = itemView.findViewById(R.id.password_TXV_password_name);
+            password_TXV_url = itemView.findViewById(R.id.password_TXV_url);
+            password_TXV_password = itemView.findViewById(R.id.password_TXV_password);
+            password_IMB_edit_password = itemView.findViewById(R.id.password_IMB_edit_password);
+            password_IMB_see_password = itemView.findViewById(R.id.password_IMB_see_password);
+            password_IMB_copy_password = itemView.findViewById(R.id.password_IMB_copy_password);
+            card_IMG_img = itemView.findViewById(R.id.card_IMG_img);
+
+            //On clicked listeners for all the buttons
+            password_IMB_edit_password.setOnClickListener(v -> passwordListener.edit(getItem(getAdapterPosition())));
+//            password_IMB_see_password.setOnClickListener(v -> passwordListener.seePassword(
+//                    (password_TXV_password.getInputType() == InputType.TYPE_TEXT_VARIATION_PASSWORD) ? true : false));
+            password_IMB_copy_password.setOnClickListener(v -> passwordListener.copy(getItem(getAdapterPosition())));
+            password_IMB_see_password.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (password_TXV_password.getInputType() == InputType.TYPE_TEXT_VARIATION_PASSWORD)
+                        password_TXV_password.setInputType(InputType.TYPE_CLASS_TEXT);
+                    else
+                        password_TXV_password.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
+//                    final Handler handler = new Handler(Looper.getMainLooper());
+//                    handler.postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            password_TXV_password.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+//                        }
+//                    }, 2000);
+
+                }
+            });
 
 
-            // TODO: 06/02/2023 handel the buttons and the card click
-//            list_BTN_delete.setOnClickListener(view -> contactListener.delete(getItem(getAdapterPosition())));
-//            list_BTN_edit.setOnClickListener(view -> contactListener.edit(getItem(getAdapterPosition())));
-//            itemView.setOnClickListener(view -> contactListener.clicked(getItem(getAdapterPosition())));
+            itemView.setOnClickListener(v -> passwordListener.passwordClicked(getItem(getAdapterPosition())));
+
         }
-
 
 
     }
