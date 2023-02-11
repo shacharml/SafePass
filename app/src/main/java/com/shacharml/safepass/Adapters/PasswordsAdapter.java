@@ -1,4 +1,4 @@
-package com.shacharml.safepass;
+package com.shacharml.safepass.Adapters;
 
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
 import com.shacharml.safepass.Entities.Password;
+import com.shacharml.safepass.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -155,7 +156,7 @@ public class PasswordsAdapter extends RecyclerView.Adapter<PasswordsAdapter.Pass
             });
 
 
-            itemView.setOnClickListener(v -> passwordListener.passwordClicked(getItem(getAdapterPosition())));
+            itemView.setOnClickListener(v -> passwordListener.passwordClicked(getItem(getBindingAdapterPosition())));
 
         }
 

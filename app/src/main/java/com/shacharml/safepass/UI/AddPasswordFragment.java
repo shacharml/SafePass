@@ -1,5 +1,7 @@
 package com.shacharml.safepass.UI;
 
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -17,6 +20,9 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.TextInputLayout;
+import com.shacharml.safepass.Adapters.CompaniesAdapter;
+import com.shacharml.safepass.Entities.Company;
+import com.shacharml.safepass.Entities.CompanyList;
 import com.shacharml.safepass.Entities.Password;
 import com.shacharml.safepass.R;
 import com.shacharml.safepass.ViewModels.PasswordViewModel;
@@ -45,10 +51,15 @@ public class AddPasswordFragment extends Fragment {
     private ImageButton new_BTN_back;
     private RecyclerView new_RYC_images;
     private FloatingActionButton new_FAB_img_edit;
-    private ShapeableImageView new_IMG_password;
+//    private ShapeableImageView new_IMG_password;
+    private AppCompatImageView new_IMG_password;
 
     private View view;
     private PasswordViewModel passwordViewModel;
+    String currentIcon;
+
+    private CompanyList companyList ;
+    private CompaniesAdapter adapter ;
 
     public AddPasswordFragment() {}
 
@@ -66,6 +77,23 @@ public class AddPasswordFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_add_password, container, false);
 
         initViews(view);
+        adapter = new CompaniesAdapter();
+        companyList = new CompanyList();
+
+        adapter.setCompanyListener(new CompaniesAdapter.CompanyListener() {
+            @Override
+            public void companyClicked(Company company) {
+                // TODO: 09/02/2023 complete
+                new_IMG_password.setImageResource(company.getIcon());
+//                new_IMG_password.setBackground(requireContext().getDrawable(company.getIcon()));
+                currentIcon = String.valueOf(company.getIcon());
+            }
+        });
+
+        //init the companies list
+        adapter.setPasswords(companyList.getCompanyData());
+        new_RYC_images.setAdapter(adapter);
+
         new_BTN_Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,6 +131,10 @@ public class AddPasswordFragment extends Fragment {
         String name = new_TIL_name.getEditText().getText().toString();
         String url = new_TIL_url.getEditText().getText().toString();
         Password newPassword = new Password(name,password);
+//        newPassword.setImg(String.valueOf(new_IMG_password.getDrawable()));
+
+            newPassword.setImg(currentIcon);
+
         newPassword.setUrlToSite(url);
 
         passwordViewModel.insert(newPassword);

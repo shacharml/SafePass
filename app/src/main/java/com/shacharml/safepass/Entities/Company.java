@@ -1,4 +1,4 @@
-package com.shacharml.safepass.Objects;
+package com.shacharml.safepass.Entities;
 
 public class Company {
 

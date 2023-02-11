@@ -36,7 +36,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
 import com.shacharml.safepass.Entities.Password;
-import com.shacharml.safepass.PasswordsAdapter;
+import com.shacharml.safepass.Adapters.PasswordsAdapter;
 import com.shacharml.safepass.R;
 import com.shacharml.safepass.ViewModels.PasswordViewModel;
 

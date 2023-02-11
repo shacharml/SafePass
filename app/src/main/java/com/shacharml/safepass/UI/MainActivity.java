@@ -11,21 +11,14 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
-import com.shacharml.safepass.Entities.Password;
-import com.shacharml.safepass.PasswordsAdapter;
 import com.shacharml.safepass.R;
 import com.shacharml.safepass.Utils.HelperHTML;
 import com.shacharml.safepass.ViewModels.PasswordViewModel;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
