@@ -3,7 +3,6 @@ package com.shacharml.safepass.Adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,13 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.imageview.ShapeableImageView;
 import com.shacharml.safepass.Entities.Company;
-import com.shacharml.safepass.Entities.Password;
 import com.shacharml.safepass.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CompaniesAdapter extends RecyclerView.Adapter<CompaniesAdapter.CompanyViewHolder>  {
+public class CompaniesAdapter extends RecyclerView.Adapter<CompaniesAdapter.CompanyViewHolder> {
 
     private List<Company> companies = new ArrayList<>();
     private CompaniesAdapter.CompanyListener companyListener;
@@ -63,8 +61,8 @@ public class CompaniesAdapter extends RecyclerView.Adapter<CompaniesAdapter.Comp
 
     class CompanyViewHolder extends RecyclerView.ViewHolder {
 
-        private ShapeableImageView company_img;
-        private TextView company_name;
+        private final ShapeableImageView company_img;
+        private final TextView company_name;
 
         public CompanyViewHolder(View itemView) {
             super(itemView);

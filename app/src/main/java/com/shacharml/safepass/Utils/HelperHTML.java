@@ -1,7 +1,6 @@
 package com.shacharml.safepass.Utils;
 
 import android.app.Activity;
-import android.os.Build;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
@@ -23,14 +22,14 @@ public class HelperHTML {
 
     public static HelperHTML initHelper() {
         if (single_instance == null)
-            single_instance=new HelperHTML();
+            single_instance = new HelperHTML();
 
         return single_instance;
     }
 
     public static void openHtmlTextDialog(Activity activity, String fileNameInAssets) {
         String str = "";
-        InputStream is = null;
+        InputStream is;
 
         try {
             is = activity.getAssets().open(fileNameInAssets);
@@ -46,14 +45,11 @@ public class HelperHTML {
         MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder(activity);
         materialAlertDialogBuilder.setPositiveButton("Close", null);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            materialAlertDialogBuilder.setMessage(Html.fromHtml(str, Html.FROM_HTML_MODE_LEGACY));
-        } else {
-            materialAlertDialogBuilder.setMessage(Html.fromHtml(str));
-        }
+        materialAlertDialogBuilder.setMessage(Html.fromHtml(str, Html.FROM_HTML_MODE_LEGACY));
 
         AlertDialog al = materialAlertDialogBuilder.show();
         TextView alertTextView = al.findViewById(android.R.id.message);
+        assert alertTextView != null;
         alertTextView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 }

@@ -20,7 +20,7 @@
         android:elevation="6dp"
         android:fontFamily="@font/gafata"
         android:rotation="-90"
-        android:text="SafePass"
+        android:text="@string/app_name"
         android:textColor="#BFE2ED"
         android:textSize="26sp"
         android:textStyle="bold" />

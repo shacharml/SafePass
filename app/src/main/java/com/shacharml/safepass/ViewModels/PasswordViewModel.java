@@ -13,8 +13,8 @@ import java.util.List;
 
 public class PasswordViewModel extends AndroidViewModel {
 
-    private PasswordRepository passwordRepository;
-    private LiveData<List<Password>> allPasswords;
+    private final PasswordRepository passwordRepository;
+    private final LiveData<List<Password>> allPasswords;
 
     public PasswordViewModel(@NonNull Application application) {
         super(application);
@@ -22,15 +22,18 @@ public class PasswordViewModel extends AndroidViewModel {
         allPasswords = passwordRepository.getAllPasswords();
     }
 
-    public void insert(Password password){
+    public void insert(Password password) {
         passwordRepository.insert(password);
     }
+
     public void updatePassword(Password password) {
         passwordRepository.updatePassword(password);
     }
+
     public void deleteAll() {
         passwordRepository.deleteAll();
     }
+
     public void delete(Password password) {
         passwordRepository.delete(password);
     }

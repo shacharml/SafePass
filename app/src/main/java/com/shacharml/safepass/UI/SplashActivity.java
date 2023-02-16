@@ -39,15 +39,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Intent i;
-//                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//                if (user != null) {
-//                    // User is signed in
-//                    i = new Intent(SplashActivity.this, MainActivity.class);
-//                } else {
-//                    // No user is signed in
-//                    i = new Intent(SplashActivity.this, LoginActivity.class);
-//                }
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                 finish(); //the splash page is dead cant go back to it
 
             }

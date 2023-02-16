@@ -14,16 +14,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
         android:gravity="center"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/company_img"
             android:layout_width="75dp"
             android:layout_height="75dp"
+            android:layout_marginTop="3dp"
             android:scaleType="centerCrop"
             android:src="@drawable/cl_linkedin"
-            android:layout_marginTop="3dp"
             app:shapeAppearanceOverlay="@style/almost_circle" />
 
         <TextView

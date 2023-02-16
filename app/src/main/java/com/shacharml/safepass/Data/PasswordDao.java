@@ -17,7 +17,7 @@ public interface PasswordDao {
     @Insert
     void insert(Password password);
 
-//    @Query("DELETE FROM password_table WHERE userId = :userId ")
+    // @Query("DELETE FROM password_table WHERE userId = :userId ")
     @Query("DELETE FROM password_table")
     void deleteAll();
 
@@ -29,11 +29,12 @@ public interface PasswordDao {
 
     /**
      * mast have for the recycler view
-//     * @param userId
+     * //     * @param userId
+     *
      * @return LiveData of the Passwords List
      */
 //    @Query("SELECT * FROM password_table WHERE userId = :userId ORDER BY name ASC")
     @Query("SELECT * FROM password_table ORDER BY name ASC")
-    LiveData<List<Password>> getPasswordsList ();
+    LiveData<List<Password>> getPasswordsList();
 //    LiveData<List<Password>> getPasswordsList (int userId);
 }

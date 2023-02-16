@@ -19,7 +19,6 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,10 +34,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
-import com.shacharml.safepass.Entities.Password;
 import com.shacharml.safepass.Adapters.PasswordsAdapter;
+import com.shacharml.safepass.Entities.Password;
 import com.shacharml.safepass.R;
+import com.shacharml.safepass.Utils.EncryptionManager;
 import com.shacharml.safepass.ViewModels.PasswordViewModel;
+
+import java.util.Objects;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
@@ -48,8 +50,6 @@ public class PasswordListFragment extends Fragment {
     ClipboardManager clipboardManager;
     FrameLayout layout;
     private PasswordViewModel passwordViewModel;
-    private RecyclerView password_RCV_all_password;
-    private AppCompatImageButton main_BTN_add;
     private View view;
     private PasswordsAdapter adapter;
     SimpleCallback simpleCallback = new SimpleCallback(0, LEFT | RIGHT) {
@@ -63,7 +63,7 @@ public class PasswordListFragment extends Fragment {
             int position = viewHolder.getBindingAdapterPosition();
             switch (direction) {
                 case LEFT: {
-                    passwordViewModel.delete(passwordViewModel.getAllPasswords().getValue().get(position));
+                    passwordViewModel.delete(Objects.requireNonNull(passwordViewModel.getAllPasswords().getValue()).get(position));
                     adapter.notifyItemRemoved(position);
                     break;
                 }
@@ -73,19 +73,15 @@ public class PasswordListFragment extends Fragment {
                     bundle.putInt("position", position);
                     Navigation.findNavController(view).navigate(R.id.action_passwordListFragment_to_editPasswordFragment, bundle);
                 }
+                break;
+
+                default:
+                    throw new IllegalStateException("Unexpected value: " + direction);
             }
 
         }
 
-        /**
-         * @param c
-         * @param recyclerView
-         * @param viewHolder
-         * @param dX
-         * @param dY
-         * @param actionState
-         * @param isCurrentlyActive
-         */
+
         @Override
         public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
 
@@ -103,7 +99,6 @@ public class PasswordListFragment extends Fragment {
             super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
         }
     };
-    private SearchView main_EDT_search;
 
     public PasswordListFragment() {
     }
@@ -125,7 +120,7 @@ public class PasswordListFragment extends Fragment {
         clipboardManager = (ClipboardManager) requireContext().getSystemService(Context.CLIPBOARD_SERVICE);
 
         //Init RecyclerView
-        password_RCV_all_password = view.findViewById(R.id.password_RCV_all_password);
+        RecyclerView password_RCV_all_password = view.findViewById(R.id.password_RCV_all_password);
         password_RCV_all_password.setLayoutManager(new LinearLayoutManager(requireActivity()));
         password_RCV_all_password.setHasFixedSize(true);
 
@@ -136,37 +131,24 @@ public class PasswordListFragment extends Fragment {
         new ItemTouchHelper(simpleCallback).attachToRecyclerView(password_RCV_all_password);
 
         adapter.setPasswordListener(new PasswordsAdapter.PasswordListener() {
-            @Override
-            public void edit(Password password) {
-                Log.d("ptt", "editPassword");
-                Toast.makeText(requireContext(), "edit Password", Toast.LENGTH_LONG).show();
-            }
 
-//            @Override
-//            public void seePassword(boolean bool) {
-//                Log.d("ptt","seePassword");
-//                Toast.makeText(requireContext(),"see Password",Toast.LENGTH_LONG).show();
-//
-//                if (bool)
-//                    holder.password_TXV_password.setInputType(InputType.TYPE_CLASS_TEXT);
-//                else
-//                    holder.password_TXV_password.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-//
-//            }
+            @Override
+            public void favorite(Password password) {
+                Log.d("ptt", "password favorite");
+                // TODO: 16/02/2023 finish favorite section
+
+            }
 
             @Override
             public void passwordClicked(Password password) {
                 Log.d("ptt", "passwordClicked");
-//                Toast.makeText(requireContext(), "passwordClicked", Toast.LENGTH_LONG).show();
                 popUp(password);
             }
 
             @Override
             public void copy(Password password) {
                 Log.d("ptt", "copy Password");
-                clipboardManager.setPrimaryClip(ClipData.newPlainText("coptText", password.getPassword()));
-//                Toast.makeText(requireContext(), clipboardManager.getPrimaryClip().getItemAt(0).getText(), Toast.LENGTH_LONG).show();
-
+                clipboardManager.setPrimaryClip(ClipData.newPlainText("copyText", EncryptionManager.decrypt(password.getPassword())));
             }
         });
 
@@ -178,10 +160,10 @@ public class PasswordListFragment extends Fragment {
         });
 
         //Add Button
-        main_BTN_add = view.findViewById(R.id.main_BTN_add);
+        AppCompatImageButton main_BTN_add = view.findViewById(R.id.main_BTN_add);
         main_BTN_add.setOnClickListener(v -> Navigation.findNavController(requireView()).navigate(PasswordListFragmentDirections.actionPasswordListFragmentToPasswordShowFragment()));
 
-        main_EDT_search = view.findViewById(R.id.main_EDT_search);
+        SearchView main_EDT_search = view.findViewById(R.id.main_EDT_search);
         main_EDT_search.clearFocus();
         main_EDT_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -216,7 +198,7 @@ public class PasswordListFragment extends Fragment {
 
         info_IMG_img.setImageResource(Integer.parseInt(password.getImg()));
         info_TXV_name_password.setText(password.getName());
-        info_EDT_password.setText(password.getPassword());
+        info_EDT_password.setText(EncryptionManager.decrypt(password.getPassword()));
         info_EDT_url.setText(password.getUrlToSite());
         info_BTN_ok.setOnClickListener(v -> popupWindow.dismiss());
         popUpView.setOnTouchListener((v, event) -> {
@@ -231,5 +213,6 @@ public class PasswordListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
+
 
 }

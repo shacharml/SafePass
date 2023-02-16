@@ -1,7 +1,5 @@
 package com.shacharml.safepass.UI;
 
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,9 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.TextInputLayout;
 import com.shacharml.safepass.Adapters.CompaniesAdapter;
+import com.shacharml.safepass.Utils.EncryptionManager;
 import com.shacharml.safepass.Entities.Company;
 import com.shacharml.safepass.Entities.CompanyList;
 import com.shacharml.safepass.Entities.Password;
@@ -130,7 +128,7 @@ public class AddPasswordFragment extends Fragment {
 
         String name = new_TIL_name.getEditText().getText().toString();
         String url = new_TIL_url.getEditText().getText().toString();
-        Password newPassword = new Password(name,password);
+        Password newPassword = new Password(name, EncryptionManager.encrypt(password));
 //        newPassword.setImg(String.valueOf(new_IMG_password.getDrawable()));
 
             newPassword.setImg(currentIcon);

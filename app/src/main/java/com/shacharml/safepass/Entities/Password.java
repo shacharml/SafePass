@@ -4,11 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
 import com.shacharml.safepass.R;
-
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 @Entity(tableName = "password_table")
@@ -23,15 +19,12 @@ public class Password {
     private String password;
     private String urlToSite;
     private String img;
-//    @ColumnInfo(name = "userId", index = true)
-//    private int userId;
 
     public Password(String name, String password) {
         id = UUID.randomUUID().toString();
         this.name = name;
         this.password = password;
         img = String.valueOf(R.drawable.ic_favorite);
-//        this.userId = userId;
     }
 
     public Password(String name, String password, String urlToSite, String img) {
@@ -86,14 +79,6 @@ public class Password {
         this.img = img;
     }
 
-//    public int getUserId() {
-//        return userId;
-//    }
-//
-//    public void setUserId(int userId) {
-//        this.userId = userId;
-//    }
-
     @Override
     public String toString() {
         return "Password{" +
@@ -105,14 +90,6 @@ public class Password {
                 '}';
     }
 
-    public Map<String, Object> toMap() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("id", id);
-        result.put("name", name);
-        result.put("password", password);
-        result.put("urlToSite", urlToSite);
-        result.put("img", img);
-        return result;
-    }
+
 }
 
