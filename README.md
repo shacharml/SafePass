@@ -16,26 +16,25 @@ width="150" hspace="10" vspace="10"> -->
 - Android Studio - develop in Java
 - Room Database (Local DB).
 - MVVM (Model-View-ViewModel) - android structured.
-- LiveData.
+  - Android View Model
+  - Repository
+  - LiveData
+- Navigation - NavGraph, NavController.
+- Build HTML popup viewer.
 
 ## :iphone: Screenshots
 
-<!-- <p>
-<img src="https://user-images.githubusercontent.com/66873825/119156647-0fdb4b00-ba72-11eb-9b8f-591930ca1d85.jpg" alt="Splash View" width="200">
-<img src="https://user-images.githubusercontent.com/66873825/119160372-d4428000-ba75-11eb-85ba-b4713f11a582.jpg" alt="Home View" width="200">
-<img src="https://user-images.githubusercontent.com/66873825/119157561-eff85700-ba72-11eb-9ef9-7f039dba3dc1.jpg" alt="NavDrawer View" width="200">
-<img src="https://user-images.githubusercontent.com/66873825/119157733-1c13d800-ba73-11eb-9808-fd4513392b86.jpg" alt="NavDrawer View Login" width="200">
-<img src="https://user-images.githubusercontent.com/66873825/119168016-18d21980-ba7e-11eb-8b2f-680e4344a191.jpg" alt="Teachers View" width="200">
-<img src="https://user-images.githubusercontent.com/66873825/119168084-29828f80-ba7e-11eb-85bf-37cac4fd8807.jpg" alt="About View" width="200">
-<img src="https://user-images.githubusercontent.com/66873825/119168195-47e88b00-ba7e-11eb-83d5-8cb01fc79e1b.jpg" alt="Contribute View" width="200">
-<img src="https://user-images.githubusercontent.com/66873825/119168424-7f573780-ba7e-11eb-8153-968cfbbd34e9.jpg" alt="Groups View" width="200">
-<img src="https://user-images.githubusercontent.com/66873825/119169086-3eabee00-ba7f-11eb-81ee-954791c57893.jpg" alt="Assignment Details View" width="200">
-<img src="https://user-images.githubusercontent.com/66873825/119169235-64d18e00-ba7f-11eb-9c2a-6d199beb9cf2.jpg" alt="Assignment Date View" width="200">
-<img src="https://user-images.githubusercontent.com/66873825/119169318-7d41a880-ba7f-11eb-8aee-5ca206f7d105.jpg" alt="Assignment Time View" width="200">
-<img src="https://user-images.githubusercontent.com/66873825/119169369-8b8fc480-ba7f-11eb-9d22-221da88a83b2.jpg" alt="Login View" width="200">
-<img src="https://user-images.githubusercontent.com/66873825/119157976-58dfcf00-ba73-11eb-843b-9adae59ae2b6.jpg" alt="Register View" width="200">
-<img src="https://user-images.githubusercontent.com/66873825/119169783-0953d000-ba80-11eb-85c7-95e50e5f6aa2.jpg" alt="Profile View" width="200">
-</p> -->
+ <p>
+<img width="200" alt="Splash Screen" src="https://user-images.githubusercontent.com/68264925/219422372-025f62cc-a52d-4775-a8da-4fef184c82ec.png">
+<img width="200" alt="Login Screen" src="https://user-images.githubusercontent.com/68264925/219422449-d8453b76-41f6-41c4-8cbc-cc9e196c7076.png">
+<img width="200" alt="Drawer Menu" src="https://user-images.githubusercontent.com/68264925/219423102-1f0ddd4b-46f8-4602-8639-aca73124bb96.png">
+<img width="200" alt="Passwords List" src="https://user-images.githubusercontent.com/68264925/219422665-e1d58eb1-e097-4125-a197-49fdc65ba174.png">
+<img width="200" alt="Password Info" src="https://user-images.githubusercontent.com/68264925/219423186-bbfba604-7c43-49a1-adef-daeaa193d7ee.png">
+<img width="200" alt="Swipe to edit" src="https://user-images.githubusercontent.com/68264925/219423215-4a8187ba-1e30-4cdd-8b6a-373df2118613.png">
+<img width="200" alt="Edit Password" src="https://user-images.githubusercontent.com/68264925/219423472-0d8f9795-aa26-42de-b58d-e65134c59784.png">
+<img width="200" alt="Delete" src="https://user-images.githubusercontent.com/68264925/219423226-157ec440-28cc-4a11-bf23-c5d1fb8e1871.png">
+<img width="200" alt="Add Password" src="https://user-images.githubusercontent.com/68264925/219423250-2bf46ad3-9a7d-40a3-8ee0-e2807cbedb1b.png">
+</p> 
 
 ## Credits:
 >- [Lottie-Android - airbnb](https://github.com/airbnb/lottie-android)
