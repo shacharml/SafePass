@@ -9,7 +9,7 @@ public class CompanyList {
     private final ArrayList<Company> companyData = new ArrayList<>();
 
     public CompanyList() {
-        companyData.add(0, new Company(0, R.drawable.cl_general_account, "General Account"));
+        companyData.add(0, new Company(0, R.drawable.cl_general_account, "General"));
         companyData.add(1, new Company(1, R.drawable.cl_amazon, "Amazon"));
         companyData.add(2, new Company(2, R.drawable.cl_icloud, "Apple iCloud"));
         companyData.add(3, new Company(3, R.drawable.cl_canva, "Canva"));
