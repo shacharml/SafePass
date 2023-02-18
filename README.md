@@ -37,3 +37,6 @@ SafePass is a self Password Manager Android Application. <br />
 - [SwipeDecorator](https://github.com/xabaras/RecyclerViewSwipeDecorator)
 - [ImagePicker - dhaval2404](https://github.com/Dhaval2404/ImagePicker)
 
+## Video:
+[d47cb04b-59b7-4c74-a7b2-cd01341dfc8e.webm](https://user-images.githubusercontent.com/68264925/219864654-2506bf54-2865-48b1-a4aa-d82d1385b46d.webm)
+
