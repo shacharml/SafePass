@@ -1,6 +1,9 @@
 package com.shacharml.safepass.UI;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,18 +11,20 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.shacharml.safepass.Adapters.CompaniesAdapter;
 import com.shacharml.safepass.Utils.EncryptionManager;
-import com.shacharml.safepass.Entities.Company;
 import com.shacharml.safepass.Entities.CompanyList;
 import com.shacharml.safepass.Entities.Password;
 import com.shacharml.safepass.R;
@@ -59,6 +64,34 @@ public class AddPasswordFragment extends Fragment {
     private CompanyList companyList ;
     private CompaniesAdapter adapter ;
 
+    private final ActivityResultLauncher<Intent> startForMediaPickerResult = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                Intent data = result.getData();
+                if (data != null && result.getResultCode() == Activity.RESULT_OK){
+                     new_IMG_password.setImageURI(data.getData());
+                currentIcon = String.valueOf(data.getData());
+                }
+                else {
+                        Toast.makeText(requireActivity(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+    private void pickMedia() {
+        String[] mimeTypes = {"image/png", "image/jpg", "image/jpeg"};
+        ImagePicker.Companion.with(this)
+                .saveDir(requireActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES))
+                .galleryOnly()
+                .galleryMimeTypes(mimeTypes)
+                .crop()
+                .compress(768)
+                .maxResultSize(800, 800)
+                .createIntent(intent -> {
+                    startForMediaPickerResult.launch(intent);
+                    return null;
+                });
+    }
+
     public AddPasswordFragment() {}
 
     @Override
@@ -78,28 +111,26 @@ public class AddPasswordFragment extends Fragment {
         adapter = new CompaniesAdapter();
         companyList = new CompanyList();
 
-        adapter.setCompanyListener(new CompaniesAdapter.CompanyListener() {
-            @Override
-            public void companyClicked(Company company) {
-                // TODO: 09/02/2023 complete
-                new_IMG_password.setImageResource(company.getIcon());
-//                new_IMG_password.setBackground(requireContext().getDrawable(company.getIcon()));
-                currentIcon = String.valueOf(company.getIcon());
-            }
+        adapter.setCompanyListener(company -> {
+            new_IMG_password.setImageResource(company.getIcon());
+            currentIcon = String.valueOf(company.getIcon());
         });
 
         //init the companies list
         adapter.setPasswords(companyList.getCompanyData());
         new_RYC_images.setAdapter(adapter);
 
-        new_BTN_Save.setOnClickListener(new View.OnClickListener() {
+        new_FAB_img_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 06/02/2023 save methode
-                savePassword(view);
+//                HelperImagePicker.imagePick(requireActivity());
+                pickMedia();
             }
         });
 
+
+
+        new_BTN_Save.setOnClickListener(v -> {savePassword(view);});
         return view;
     }
 
@@ -203,4 +234,10 @@ public class AddPasswordFragment extends Fragment {
             return true;
         }
     }
+
+
+
+
+
+
 }

@@ -51,6 +51,7 @@ public abstract class MyDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
+//            add data to the Room DB at first
             passwordDau.insert(new Password("Spotify", EncryptionManager.encrypt("123456"), "www.google.com", String.valueOf(R.drawable.cl_spotify)));
             passwordDau.insert(new Password("Gmail", EncryptionManager.encrypt("123456"), "www.gmail.com", String.valueOf(R.drawable.cl_gmail)));
             passwordDau.insert(new Password("Facebook", EncryptionManager.encrypt("123456"), "www.facebook.com", String.valueOf(R.drawable.cl_facebook)));

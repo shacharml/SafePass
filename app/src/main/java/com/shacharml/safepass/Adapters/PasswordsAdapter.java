@@ -1,5 +1,6 @@
 package com.shacharml.safepass.Adapters;
 
+import android.net.Uri;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +43,12 @@ public class PasswordsAdapter extends RecyclerView.Adapter<PasswordsAdapter.Pass
         holder.password_TXV_password_name.setText(currentPassword.getName());
         holder.password_TXV_url.setText(currentPassword.getUrlToSite());
         holder.password_TXV_password.setText(EncryptionManager.decrypt(currentPassword.getPassword()));
-        holder.card_IMG_img.setImageResource(Integer.parseInt(currentPassword.getImg()));
+        try {
+            holder.card_IMG_img.setImageResource(Integer.parseInt(currentPassword.getImg()));
+        }
+        catch (Exception e){
+            holder.card_IMG_img.setImageURI(Uri.parse(currentPassword.getImg()));
+        }
     }
 
     @Override
@@ -100,7 +106,7 @@ public class PasswordsAdapter extends RecyclerView.Adapter<PasswordsAdapter.Pass
     }
 
     public interface PasswordListener {
-        void favorite(Password password);
+//        void favorite(Password password);
 
         //        void seePassword(boolean bool);
         void passwordClicked(Password password);
@@ -119,13 +125,13 @@ public class PasswordsAdapter extends RecyclerView.Adapter<PasswordsAdapter.Pass
             password_TXV_password_name = itemView.findViewById(R.id.password_TXV_password_name);
             password_TXV_url = itemView.findViewById(R.id.password_TXV_url);
             password_TXV_password = itemView.findViewById(R.id.password_TXV_password);
-            AppCompatImageButton password_IMB_fav_password = itemView.findViewById(R.id.password_IMB_fav_password);
+//            AppCompatImageButton password_IMB_fav_password = itemView.findViewById(R.id.password_IMB_fav_password);
             AppCompatImageButton password_IMB_see_password = itemView.findViewById(R.id.password_IMB_see_password);
             AppCompatImageButton password_IMB_copy_password = itemView.findViewById(R.id.password_IMB_copy_password);
             card_IMG_img = itemView.findViewById(R.id.card_IMG_img);
 
             //On clicked listeners for all the buttons
-            password_IMB_fav_password.setOnClickListener(v -> passwordListener.favorite(getItem(getBindingAdapterPosition())));
+//            password_IMB_fav_password.setOnClickListener(v -> passwordListener.favorite(getItem(getBindingAdapterPosition())));
             password_IMB_copy_password.setOnClickListener(v -> passwordListener.copy(getItem(getBindingAdapterPosition())));
             password_IMB_see_password.setOnClickListener(v -> {
                 if (password_TXV_password.getInputType() == InputType.TYPE_TEXT_VARIATION_PASSWORD)

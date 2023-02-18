@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
 import com.shacharml.safepass.R;
+
 import java.util.UUID;
 
 @Entity(tableName = "password_table")
@@ -24,7 +26,7 @@ public class Password {
         id = UUID.randomUUID().toString();
         this.name = name;
         this.password = password;
-        img = String.valueOf(R.drawable.ic_favorite);
+        img = String.valueOf(R.drawable.ic_key);
     }
 
     public Password(String name, String password, String urlToSite, String img) {
@@ -89,7 +91,4 @@ public class Password {
                 ", img='" + img + '\'' +
                 '}';
     }
-
-
 }
-

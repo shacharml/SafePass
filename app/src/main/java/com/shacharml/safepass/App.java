@@ -11,5 +11,6 @@ public class App extends Application {
         super.onCreate();
         //initialize HTML viewer helper singleton
         HelperHTML.initHelper();
+
     }
 }

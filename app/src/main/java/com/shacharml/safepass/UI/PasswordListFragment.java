@@ -9,6 +9,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -132,12 +133,10 @@ public class PasswordListFragment extends Fragment {
 
         adapter.setPasswordListener(new PasswordsAdapter.PasswordListener() {
 
-            @Override
-            public void favorite(Password password) {
-                Log.d("ptt", "password favorite");
-                // TODO: 16/02/2023 finish favorite section
-
-            }
+//            @Override
+//            public void favorite(Password password) {
+//                Log.d("ptt", "password favorite");
+//            }
 
             @Override
             public void passwordClicked(Password password) {
@@ -191,16 +190,20 @@ public class PasswordListFragment extends Fragment {
         PopupWindow popupWindow = new PopupWindow(popUpView, width, height, focusable);
 
         ShapeableImageView info_IMG_img = popUpView.findViewById(R.id.info_IMG_img);
-        Button info_BTN_ok = popUpView.findViewById(R.id.info_BTN_ok);
         TextView info_TXV_name_password = popUpView.findViewById(R.id.info_TXV_name_password);
         MaterialTextView info_EDT_password = popUpView.findViewById(R.id.info_EDT_password);
         MaterialTextView info_EDT_url = popUpView.findViewById(R.id.info_EDT_url);
 
-        info_IMG_img.setImageResource(Integer.parseInt(password.getImg()));
+        try {
+            info_IMG_img.setImageResource(Integer.parseInt(password.getImg()));
+        }
+        catch (Exception e){
+            info_IMG_img.setImageURI(Uri.parse(password.getImg()));
+
+        }
         info_TXV_name_password.setText(password.getName());
         info_EDT_password.setText(EncryptionManager.decrypt(password.getPassword()));
         info_EDT_url.setText(password.getUrlToSite());
-        info_BTN_ok.setOnClickListener(v -> popupWindow.dismiss());
         popUpView.setOnTouchListener((v, event) -> {
             popupWindow.dismiss();
             return true;

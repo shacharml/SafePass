@@ -10,14 +10,13 @@ import com.shacharml.safepass.Data.PasswordDao;
 import com.shacharml.safepass.Entities.Password;
 
 import java.util.List;
-import java.util.concurrent.Executors;
 
 public class PasswordRepository {
 
     private final PasswordDao passwordDau;
-    private LiveData<List<Password>> allPasswords;
+    private final LiveData<List<Password>> allPasswords;
 
-    public PasswordRepository(Application application){
+    public PasswordRepository(Application application) {
         passwordDau = MyDatabase.getInstance(application).passwordDao();
         allPasswords = passwordDau.getPasswordsList();
     }
@@ -36,9 +35,11 @@ public class PasswordRepository {
 //            }
 //        });
     }
+
     public void deleteAll() {
         new PasswordRepository.DeleteAllPasswordAsyncTask(passwordDau).execute();
     }
+
     public void delete(Password password) {
         new PasswordRepository.DeletePasswordAsyncTask(passwordDau).execute(password);
     }
@@ -53,8 +54,8 @@ public class PasswordRepository {
      * threads or something like that
      * todo ask vadim if there is another way to do this and not duplicate code
      */
-    private static class InsertPasswordAsyncTask extends AsyncTask<Password,Void, Void> {
-        private PasswordDao PasswordDau;
+    private static class InsertPasswordAsyncTask extends AsyncTask<Password, Void, Void> {
+        private final PasswordDao PasswordDau;
 
         public InsertPasswordAsyncTask(PasswordDao PasswordDau) {
             this.PasswordDau = PasswordDau;
@@ -67,8 +68,8 @@ public class PasswordRepository {
         }
     }
 
-    private static class UpdatePasswordAsyncTask extends AsyncTask<Password,Void, Void>{
-        private PasswordDao PasswordDau;
+    private static class UpdatePasswordAsyncTask extends AsyncTask<Password, Void, Void> {
+        private final PasswordDao PasswordDau;
 
         public UpdatePasswordAsyncTask(PasswordDao PasswordDau) {
             this.PasswordDau = PasswordDau;
@@ -81,8 +82,8 @@ public class PasswordRepository {
         }
     }
 
-    private static class DeleteAllPasswordAsyncTask extends AsyncTask<Void,Void, Void>{
-        private PasswordDao passwordDau;
+    private static class DeleteAllPasswordAsyncTask extends AsyncTask<Void, Void, Void> {
+        private final PasswordDao passwordDau;
 
         public DeleteAllPasswordAsyncTask(PasswordDao PasswordDau) {
             this.passwordDau = PasswordDau;
@@ -95,8 +96,8 @@ public class PasswordRepository {
         }
     }
 
-    private static class DeletePasswordAsyncTask extends AsyncTask<Password,Void, Void>{
-        private PasswordDao passwordDau;
+    private static class DeletePasswordAsyncTask extends AsyncTask<Password, Void, Void> {
+        private final PasswordDao passwordDau;
 
         public DeletePasswordAsyncTask(PasswordDao PasswordDau) {
             this.passwordDau = PasswordDau;
