@@ -3,7 +3,7 @@
 <img src=https://user-images.githubusercontent.com/68264925/219410902-e1d553a7-8132-4f7b-9f11-09950741d2c7.png align="left"
 width="150" hspace="10" vspace="10">
 SafePass is a self Password Manager Android Application. <br />
-<img width="800" alt="header" src="https://user-images.githubusercontent.com/68264925/219431521-090f3a98-8b56-43ff-8d6c-1fa2dcb56d02.png" align="center">
+<img width="700" alt="header" src="https://user-images.githubusercontent.com/68264925/219431521-090f3a98-8b56-43ff-8d6c-1fa2dcb56d02.png" align="center">
 <br />
 <br />
 
@@ -32,6 +32,8 @@ SafePass is a self Password Manager Android Application. <br />
 </p> 
 
 ## Credits:
->- [Lottie-Android - airbnb](https://github.com/airbnb/lottie-android)
->- [Icons - icons8](https://icons8.com/)
->- [SwipeDecorator](https://github.com/xabaras/RecyclerViewSwipeDecorator)
+- [Lottie-Android - airbnb](https://github.com/airbnb/lottie-android)
+- [Icons - icons8](https://icons8.com/)
+- [SwipeDecorator](https://github.com/xabaras/RecyclerViewSwipeDecorator)
+- [ImagePicker - dhaval2404](https://github.com/Dhaval2404/ImagePicker)
+
